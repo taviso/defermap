@@ -95,7 +95,7 @@ static void MapDeferred(int n)
     alarm(0);
 
     // Indicate we are no longer a server.
-    prctl(PR_SET_NAME, "");
+    prctl(PR_SET_NAME, "xterm");
 
     // Remove our signal handlers, we no longer need them.
     signal(SIGUSR1, SIG_DFL);

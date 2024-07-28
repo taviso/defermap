@@ -85,11 +85,11 @@ $ start-stop-daemon --startas xargs                 \
                     --chdir $HOME                   \
                     --quiet                         \
                     --start                         \
-                    --  --null                      \
-                        --arg-file=/dev/zero        \
-                        --max-procs=3               \
-                        --replace                   \
-                        -- env LD_PRELOAD=defermap.so xterm -display :0 [...]
+                    -- --null                       \
+                       --arg-file=/dev/zero         \
+                       --max-procs=3                \
+                       --replace                    \
+                       -- env LD_PRELOAD=defermap.so xterm -display :0 [...]
 ```
 
 You probably also want an alias or shell function to invoke it, something like
