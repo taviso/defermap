@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <stdarg.h>
 #include <dlfcn.h>
+#include <errno.h>
 #include <sys/prctl.h>
 #include <X11/Xlib.h>
 
@@ -95,7 +96,7 @@ static void MapDeferred(int n)
     alarm(0);
 
     // Indicate we are no longer a server.
-    prctl(PR_SET_NAME, "xterm");
+    prctl(PR_SET_NAME, program_invocation_short_name);
 
     // Remove our signal handlers, we no longer need them.
     signal(SIGUSR1, SIG_DFL);
