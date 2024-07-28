@@ -48,7 +48,7 @@ If you decide you like this, you can make `xterm` an alias to this.
 
 - You can adjust the number of `xterm`s cached dynamically at runtime.
 
-> Note: This is an `xargs` feature, see `man 1 xargs` for details.
+> Note: This is an `xargs` feature, see [here](https://www.gnu.org/software/findutils/manual/html_node/find_html/Controlling-Parallelism.html) for details.
 
 You simply send `xargs` a `SIGUSR1` to increase the cache size, and a
 `SIGUSR2` to decrease it.
