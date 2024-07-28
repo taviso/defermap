@@ -51,11 +51,11 @@ If you decide you like this, you can make `xterm` an alias to this.
 > Note: This is an `xargs` feature, see `man 1 xargs` for details.
 
 You simply send `xargs` a `SIGUSR1` to increase the cache size, and a
-`SIGUSR2` to decrease it.
+`SIGALRM` to decrease it.
 
 ```
 $ pkill --signal SIGUSR1 xargs # increase number of cached xterms
-$ pkill --signal SIGUSR2 xargs # decrease number of cached xterms
+$ pkill --signal SIGALRM xargs # decrease number of cached xterms
 ```
 
 - I print reminders in my `.bashrc`, so don't want xterms sitting in the
