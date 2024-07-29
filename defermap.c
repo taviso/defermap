@@ -34,6 +34,10 @@ static const bool kActivateWindow = true;
 // The real XMapWindow function.
 static int (*XMapWindowPtr)(Display *, Window);
 
+// The original signal handlers.
+static sighandler_t origalrm;
+static sighandler_t origusr1;
+
 // The deferred window.
 static struct {
     Display *display;
@@ -99,8 +103,8 @@ static void MapDeferred(int n)
     prctl(PR_SET_NAME, program_invocation_short_name);
 
     // Remove our signal handlers, we no longer need them.
-    signal(SIGUSR1, SIG_DFL);
-    signal(SIGALRM, SIG_DFL);
+    signal(SIGUSR1, origusr1);
+    signal(SIGALRM, origalrm);
 
     // Map the deferred window.
     result = XMapWindowPtr(deferred.display, deferred.window);
@@ -172,8 +176,8 @@ int XMapWindow(Display *display, Window w)
     deferred.display  = display;
 
     // Setup our signal handlers.
-    signal(SIGUSR1, MapDeferred);
-    signal(SIGALRM, MapTimeout);
+    origusr1 = signal(SIGUSR1, MapDeferred);
+    origalrm = signal(SIGALRM, MapTimeout);
 
     // Set an optional idle timeout.
     alarm(kIdleTimeout);
